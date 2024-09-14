@@ -1,18 +1,18 @@
 #include <string>
 #include <vector>
+#include <iostream>
 #include <sstream>
 #include <algorithm>
 using namespace std;
 
 string solution(string s) {
-    string answer = "", tmp;
-    long long a,b;
-    vector<int>v;
+    string answer = "";
     stringstream ss(s);
-    while(getline(ss, tmp, ' ')) v.push_back(stoi(tmp));
-    
-    a = *max_element(v.begin(), v.end());
-    b = *min_element(v.begin(), v.end());
-    answer = to_string(b) + " " + to_string(a);
+    vector<int>v;
+    while(getline(ss, answer, ' ')){
+        v.push_back(stoi(answer));
+    } 
+    answer = "";
+    answer = answer + to_string(*min_element(v.begin(), v.end())) + " " +to_string(*max_element(v.begin(), v.end()));
     return answer;
 }
