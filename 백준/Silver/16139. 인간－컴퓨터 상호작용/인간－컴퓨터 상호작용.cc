@@ -14,25 +14,28 @@ int main()
         string s;
         bool check = false;
         cin >> s >> n;
-        vector<int>v(s.length() + 1,0);
+        vector<vector<int>>v(27, vector<int>(s.length() + 1, 0));
+
+
+        for (int i = 0; i < 27; i++) {
+	char ch = 'a' + i;
+	for (int j = 1; j <= s.length(); j++) {
+	        if (s[j - 1] == ch) {
+		v[i][j] = v[i][j - 1] + 1;
+	        }
+	        else {
+		v[i][j] = v[i][j - 1];
+	        }
+	}
+        }
+        
 
         for (int i = 0; i < n; i++) {
-	fill(v.begin(), v.end(), 0);
 	char ch;
 	int a, b;
 	cin >> ch >> a >> b;
 
-	for (int j = 1; j <= s.length(); j++) {
-	        if (s[j-1] == ch) {
-		v[j] = v[j - 1] + 1;
-	        }
-	        else {
-		v[j] = v[j - 1];
-	        }
-	}
-	cout << v[b+1] - v[a] << "\n";
-
+	cout << v[ch-'a'][b + 1] - v[ch-'a'][a] << "\n";
         }
-        
         return 0;
 }
